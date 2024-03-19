@@ -1,0 +1,23 @@
+package jobOffersTry;
+
+import java.util.*;
+
+public class Candidate {
+	
+	String name;
+	
+	public Candidate(String name) {
+		this.name=name;
+	}
+	
+	private Collection<String> skills=new TreeSet<>();
+	
+	public void addSkill(String skill) {
+		skills.add(skill);
+	}
+	
+	public int numSkills() {
+		return skills.size();
+	}
+
+}

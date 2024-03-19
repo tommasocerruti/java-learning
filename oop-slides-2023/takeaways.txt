@@ -1,0 +1,622 @@
+-- Lectures takeaways --
+J01-JavaEnvironment
+J02-JavaBasics
+J02a-JavaCharactersAndStrings
+J03-JavaInheritance
+J04-JavaGenerics
+J05-JavaCollections
+J06-JavaStreams
+________________
+J01-JavaEnvironment
+
+1. Coding conventions:
+class ClassName{
+	final static double PI=3.14;
+	private int attributeName;
+	public void methodName{
+		boolean status;
+		// code
+	}
+}
+
+________________
+J02-JavaBasics
+
+1. Basics of Java
+- parameters are always passed by value
+- instances are defined variables
+- declaration of classes allocates memory for the reference ('pointer')
+- allocation and initialization of the object are made later by its constructor
+- local variables are not automatically initialized to null, but they must be explicitly initialized, however instance variables are automatically initialized to null
+- class is composed by attributes (.) [variables that describe the data that can be stored within objects], methods (.(...)) [messages that an object can accept] and constructors (new(...)) [creating a new instance of the specified class, stored in the heap dynamically allocating the memory at run-time]
+- overloading: several methods in a class can share the same name as long as they have a distinct signature (i.e. the method name and the ordered list of argument types)
+
+2. Scope and encapsulation
+- visibility modifiers: private (member is visible and accessible from instances of the same class only - info hiding from other classes), public (member is visible and accessible from everywhere), ...
+- getters and setters: methods to read/write private attributes (use shortcuts of Eclipse; Source->Generate Getters and Setters)
+- modifiers and query methods: modifiers change the state of the object but do not return a value (like setters) while queries return a result and do not change the sate of the object (like getters)
+- package is a logic set of class definitions, consisting of different files each packet defining a new scope: declaration (declaring done at the beginning of each class file - package packageName;) and usage (importing done at the beggining of class file where needed - import packageOne.className; import packageTwo.*), note: if two packagees define a class with the same name, one of them needs its fully-qualified-name (if no package is specified, it goes in the default package but it is discouraged)
+- visibility across multiple packages: public classA{} class and public members of A are visible from outside the package, class B{} class and any members are not visible from outside the package but visible to the package, private class C{} is illegal since it would be visible only to itself
+
+3. Wrapper Classes
+- Object versions of primitive classes (defined in java.lang package) defining converion operations between different types
+-- Example:
+Integer obj= new Integer(88);
+String s= obj.toString();
+int i = obj.intValue();
+int j= Integer.parseInt("99"); --
+- Autoboxing: since Java5, the conversion between primitive types and wrapper classes is performed automatically (Integer i= new Integer(2); int j=i+5; //instead of j= i.intValue()+5;)
+
+4. Arrays
+- An ordered sequence of variables of the same type which are accessed through an index, containing both primitive types or object references (but no object values) and its dimension can be defined at run-time during the object creation (but cannot change afterwards)
+- Array declaration and creation: int[] a; a = new int[10]; int[] primes = {2,3,5,7,11}
+- Array length is given by the attribute length: a.length
+- For each: new loop construct, for (Type var : set_expression), which puts the burden of working with the correct indices on the compiler, but losing track of index information.
+-- Example:
+for (String arg : args){
+	//...
+}
+//is equivalent to
+for (int i=0; i<args.length; ++i){
+	String arg=args[i]=args[i];
+	//...
+}
+- Multidimensional array can be implemented as array of arrays: Person[][] table = new Person[2][3]; table[0][2] = new Person("Mary");
+
+5. Static keyword and utility classes
+- Static attributes: represent properties which are common to all instances of a class (so a single copy of a static attribute is shared by all instances of the class, like a count of how many times has that particular class been instantiated)
+- Static methods: methods not related to any instance (hence they are used to implement functions, but are not be overused to keep the paradigm OOP oriented)
+- Function method: method whose return value depends only on the arguments, often collected within a utility class
+- Utility classes:
+ . System: interact with the OS
+ . Math: implement math-related function methods (trigonometric, min-max, exp, log, random number generattion, truncations, etc.)
+ . Arrays: functions to operate on arrays [binary search: binarySearch(), copy: copyOf() / copyOfRange(), equality: equals(), fill-in: fill(), sorting: sort(), string representation: toString()]
+ . Objects: functions to operate on object
+
+6. Final keyword
+- Final attribute: attribute cannot be changed after object construction and can be initialized either inline or by the constructor
+- Final parameters: parameters that cannot be changed, non-final parameters instead are treated as local variables
+- Final variables: variable cannot be modified after initialization, but initialization can occur at declaration or later
+
+7. Nested classes
+- Static nested class: class declared inside another class, used to hide that class to make it usable only within the other class
+-- Example:
+public class StackOfInt{
+	private static class Element{
+		int value;
+		Element next;
+	}
+	private Element head;
+	public void push(int v){ ... }
+	public int void pop(){ ... }
+}
+- Inner class: class liked to an instance (i.e. non-static nested class)
+-- Example:
+public class Counter{
+	int i; //default value of i is zero
+	public class Incrementer {
+		private int step=1;
+		public void doIncrement(){i+=step;}
+		Incrementer(int step){this.step=step;}
+	}
+	public Incrementer buildIncrementer(int step){
+		return new Incrementer(step);
+	}
+	public int getValue(){
+		return i;
+	}
+}
+...
+Counter c=new Counter();
+Incrementer byOne = c.buildIncrementer(1);
+Incrementer byFour = c.buildIncrementer(4);--
+
+8. Memory management
+- Static memory: elements living for all the executioon of a program (class definitions, static variables)
+- Heap (dynamic memory): elements created at run-time (with 'new' statement)
+- Stack: elements created in a code block (local variables and method parameters)
+- Java has a garbage collector that cleans heap from 'dead' objects
+
+________________
+J02a-JavaCharactersAndStrings
+
+1. Wrapper Character
+- Encapsulate a single character, immutable like all wrapper classes
+- Utility methods: isLetter(), isDigit(), isSpaceChar(), toUpperCase(), toLowerCase()
+- Default charset: UTF-8
+
+2. Strings
+- Class String: not modifiable (immutable)
+- Class StringBuffer / StringBuilder: modifiable (mutable)
+- Operator + concatinates two strings
+- String methods:
+ . int length(), returns string length
+ . boolean equals(String s), compares the contents of two strings. It is useful because only a normal comparison is by reference and not by value
+ . String toUpperCase()/toLowerCase(), returns new string converted to upper/lower case
+ . int concat(String str), creates a concatenation with the given string
+ . int compareTo(String str), compare to another string returning <0 if this string precedes the other, ==00 if equal, >0 is this string follows the other based on the alphabetical order
+ . String subString(int startIndex), returns the substring from the startIndex until the end
+ . String subsString(int start, int end), return the substring from start included to end excluded
+ . int indexOf(String str), returns the index of the first occurence of str
+ . int lastIndexOf(String str), returns the index of the last occurence of str
+ . String valueOf(..), converts any primitive type into a String
+ . String format(String fmt, ...), builds a string using the format string
+- String buffer represents a string of characters, but it is mutable so it allows operation that modify the content, and can be converted to the corresponding String using the method toString()
+- StringBuffer methods:
+ . append(String str), inserts str at the end of string
+ . insert(int offset, String str), inserts str starting from offset position
+ . delete(int start, int end), deletes character from start to end (excluded)
+ . reverse(), reverses the sequence of characters
+They all return a StringBuffer enabling chaining
+- StringBuilder is like StringBuffer but it is not thread safe (i.e. two threads can call the methods of StringBuilder simultanously) but more efficient
+- String pooling: Class String maintains a private static pool of distinct strings. The method intern() checks if any string in the pool equals(), if not it adds the string to the pool and returns the string in the pool
+
+________________
+J03-JavaInheritance
+
+1. Idea
+- A class can be a sub-type of another (base) class, where the new (derived) class implicitly contains (inherits) all members of the class it inherits from, as well as override the definition of existing methods by providing its own implementation.
+- Inheritance avoids code repetitions when many classes have few features in common. The procedure of the inheritance is like a tree, its depths cannot exceed 5 because deep trees reduce code understandability. It is executed with the "extends" statement.
+- Terminology: Parent(one class above), Child(one class below), Superclass/ Ancestor class/ Base class (one or more above), Subclass/ Descendent class(one or more below)
+-- Example:
+class Employee{
+	String name;
+	double wage;
+	void incrementWage(){...}
+}
+class Manager extends Employee{
+	String managedUnit;
+	void changeUnit(){...}
+}
+Manager m= new Manager();
+m.incrementWage(); //OK, inherited
+
+2. Polymorphism and Dynamic binding
+- Polymorphis: A reference of type T can point to an object of type S iff S is equal or subclass wrt T
+- Dynamic binding: The JVM retrieves the effective class of the target object, if that class defines the required method, it is executed, otherwise the parent class is considered and step 2 is repeated
+- Override: A method override must use exactly the original method signature. Using annotation @Override before the override informs the compiler that a method is intended as override, but if the override is not correct (i.e. the method is slightly different) it triggers an error at run-time
+
+3. Casting
+- Primitive types (if suitable) can be casted either explicitly or implicitly
+- Upcast is assigning a more specific type (subtype) to a more general type (supertype). It is always type-safe and is implicitly performed by the compiler
+- Downcast is assigning a more general type (supertype) to a more specific type (subtype). It is not safe by default, and it is not done automatically by the compiler, so it must be explicitly done.
+- "instanceof" operator returns true if the object pointed by the reference can be cast to the class (i.e. it can be an instance of the class)
+
+4. Visibility (scope)
+- Attributes and methods marked as
+ . public are always accessible
+ . protected are accessible from withing the class, classes in the package and subclasses
+ . package are accessible from within the class and classes in the package
+ . private are accessible from within the class only
+
+5. Constructors
+- Java compiler automatically inserts a call to default constructor of the parent class as first statement, and executes the constructors top-down in the inheritance hierarchy
+- Whenever a constuctor is defined, the default one disappears. The child class must call the righ constructor of the parent class explicitly. super() is used to invoke the constructor of the parent class and pass appropriate arguments, and must be the first statement in the child constructor.
+- When a method in a derived class overrides one in the base class, the latter is masked, but the method can be re-used with super().
+-- Example:
+class Employee{
+	private String name;
+	private double wage;
+	Employee(String n, double w){
+		name=n;
+		wage=w;
+	}
+	public void print(){
+		System.out.println(name);
+	}
+}
+class Manager extends Employee{
+	private int unit;
+	Manager(String n, double w, int u){
+		super(n,w);
+		u=unit;
+	}
+	public void print(){
+		super.print();
+		System.out.println("\tmanages "+unit);
+	}
+}
+- They keyword final applied to a method makes it not overridable by subclasses
+
+6. Class Object
+- Ancestor of every class in Java which adds methods in common to every class, indeed it is always possible to upcast any instance to Object type
+- In this way we can collect heterogeneous objects into a single container of Object type
+- Object class methods
+ . toString(), returns string representation of the object
+ . equals(), checks if two objects have same contents
+ . hashCode(), returns a unique code
+
+7. Abstract Classes
+- A class that cannot be used by itself but just as a skeleton to extend classes
+- The abstract modifier marks the method as non-complete/undefined
+- The modifier must be applied to all incomplete methods and to the class
+- A class must be declared abstract if any of its methods is abstract
+- A class that extends an abstract class should implement (i.e. override) all the base class abstract methods
+-- Example:
+public abstract class Sorter{
+	public void sort(Object v[]){
+		for (int i=1;i<v.lenght;++i){
+			for (int j=0;j<v.lenght-i;++j){
+				if (compare(v[j],v[j+1])>0){
+					Object o=v[j];
+					v[j]=v[j+1];
+					v[j+1]=o;
+				}
+			}
+		}
+	}
+	abstract int compare (Object a, Object b);
+}
+class StringSorter extends Sorter{
+	int compare (Object a, Object b){
+		String sa=(String)a;
+		String sb=(String)b;
+		return sa.compareTo(sb);
+	}
+}
+
+8. Interfaces
+- One of the main constraints in Java inheritance is that each class can derive only from its parent class, but some classes may need to derive multiple properties from multiple parents
+- Java interface is a special type of class where methods are implicitly abstract (no body), attributes are implicitly static and final and members are implicitly public
+- They are defined with the keyword interface (instead of class), cannot be instantiated (no new, just like abstract classes) and can be used as a type for reference (like abstract classes)
+- A class implementing an interface must override all interface methods, unless the class is declared abstract or it is an interface itself
+- An interface cannot extend a class but can implement many interfaces (so in this case a sort of multiple inheritance is possible), as well as a class can implement many interfaces
+- Interfaces can be used to instantiate anonymous local classes, within a method code providing implementation of methods (used for lambda functions)
+-- Example:
+public interface Complex{
+	double real();
+	double im();
+	double mod();
+	double arg();
+}
+class ComplexRect implements Complex{
+	private double im, re;
+	public ComplexRect(double re, double im){
+		this.im=im; this.re=re;
+	}
+	@Override public double real() {return re;}
+	@Override public double im() {return im;}
+	@Override public double arg() {return Math.atan2(im,re);}
+	@Override public double mod() {return Math.sqrt(re*re+im*im);}
+}
+class ComplexPolar implements Complex{
+	private double arg, mod;
+	public ComplexRect(double arg, double mod){
+		this.arg=arg; this.mod=mod;
+	}
+	@Override public double arg() {return arg;}
+	@Override public double mod() {return mod;}
+	@Override public double re() {return mod*cos(arg);}
+	@Override public double im() {return mod*sin(arg);}
+}
+--
+- Functional interface: interface containing only one regular method, whos semantics is purely functional
+
+9. Lambda Functions and Methods References
+- Lambda function is the definition of anonymous inner instances for functional interfaces (only for functional interfaces because having one method only we know to which it refers to.
+- The syntax is parameters -> body, where parameters can be none (()), one (x), two or more ((x,y)) and the body can be an expression (x+y) or a code block ({return x+y;}).
+- Method reference syntax: compact representation of functional interface that invoke single method (::)
+-- Example
+DoubleBinary Operator combine = Math::max (instead of a,b -> Math.max(a,b))
+
+________________
+J04-JavaGenerics
+
+1. Idea
+- Often the same operations have to be performed on objects of unrelated classes, a typical solution is to use Object references but they bring cumbersome code with several explicit casts, as well as potential error at compilation time, so a solution is to use generic classes and methods.
+-- Example:
+// Object-based use
+public class Pair{
+	Object a, b;
+	public Pair(Object a, Object b){this.a=a; this.b=b;}
+	Object first(){return a;}
+	Object second(){return b;}
+}
+Pair sp=new Pair("One","Two");
+Pair ip=new Pair(1,2);
+String a = (String) sp.second();
+String b = (String) ip.first(); //would give error
+if (b instance of Integer){//extra cde required for safety
+	i=(Integer)b;
+}
+else{...}
+// Generics-based use
+public class Pair<T>{
+	T a,b;
+	public Pair(T a, T b){
+		this.a=a; this.b=b;
+	}
+	public T first(){return a;}
+	public T second(){return b;}
+	public void set1st(T x){a=x;}
+	public void set2nd(T x){b=x;}
+}
+Pair<String> sp=new Pair<>("One","Two"); //slightly longer, but does not require casts
+--
+- Generic type declaration: (class|interface) Name <P1 {,P2}>,
+where the type parameters P can represent classes or interfaces, conventially uppercase letters, usually T(ype), R(eturn), E(lement), K(ey) and V(alue)
+- Use of generics leads to code that is safer, more compact, easier to understand and equally performing
+
+2. Subtyping and Covariance
+- We must be careful about inheritance when generic types are involved, indeed despite Integer is a subtype of Object, Pair<Integer> is not a subtype of Pair<Object>
+- Containers can be co-variant or invariant. Co-variance is when elements inheritance implies containers inheritance: if A extends B then Container<A> extends Container<B> (in Java this is not a safe assumption), like Arrays. Invariance is when elements inheritance does not imply container inheritance (safe assumption), like Generic types
+- Wildcards allow to express constaints when using generic types: 
+ . <?>: unknown, unbounded
+ . <? extends B>: upper bound: only sub-types of B (including B)
+ . <? super D>: lower bound: only super-types of D (including D)
+-- Example:
+static <T extends Comparable<? super T>>
+void sortPair(Pair<T> p){
+	void sortPair(Pair<T> p){
+		if (p.first().compareTo(p.second())>0){
+			T tmp=p.first();
+			p.setFirst(p.second());
+			p.setSecond(tmp);
+		}
+	}
+}
+
+3. Type erasure
+- Technique used by Java compiler to translate generic/parameterized types to raw types in Java generics.
+- The erasure of a generic class is a raw type, raw type of generic class G<T> is G.
+- Erasure of a parameter is the erasure of its first boundary: if no boundary then it is Object:
+ . For <T>: T -> Object
+ . For <T extends Number>: T-> Number
+ . For <T extends Number & Comparable>: T-> Number
+
+________________
+J05-JavaCollections
+
+1. Interfaces:
+- Regarding group containers:
+- Iterable (parent)
+- Collection implements Iterable
+- Set, Queue, List implement Collection
+- SortedSet implements Set
+- Regarding associative containers:
+- SortedMap implements Map
+
+2. Classes:
+- TreeSet implements SortedSet
+- HashSet implements Set
+- LinkedHashSet extends HashSet
+- PriorityQueue implements Queue
+- ArrayList implements List
+- LinkedList implements Queue, List
+- HashMap implements Map
+- LinkedHashMap extends HashMap
+- TreeMap extends TreeMap
+
+3. Group containers (collection)
+- Group of elements (references to objects), not specified whether they are ordered/unordered or duplicated/not-duplicated.
+- It has many methods such as int size(), boolean isEmpty(), boolean contains(E element), boolean containsAll(Collection<?> c), boolean add(E element), ...
+
+4. List interface
+- Augments Collection interface
+- Can contain duplicate elements, insertion order is preserved, user can define insertion point, elements can be accessed by position
+- Main methods: E get(int index), E set(int index, E element), void add(int index, E element), E remove(int index), ...
+- List is implemented by ArrayList and LinkedList
+- ArrayList and LinkedList are two classes that implement the List interface and provide similar functionalities but differ in their implementation and performance.
+- ArrayList internally uses a dynamic array to store its elements while LinkedList internally uses a doubly linked list to store its elements (this means that ArrayList is better suited for situations where there are more reads than writes, while LinkedList is better suited for situations where there are more writes than reads)
+- Manipulation with ArrayList is slow because it internally uses an array (if any element is removed from the array, all the bits are shifted in memory), on the other hand, adding or removing elements from a LinkedList is faster (because it only requires updating a few pointers).
+- Access by index is faster in ArrayList (because it uses an index-based system to store its elements), in contrast, LinkedList does not support fast random access (so, in order to find an element by index in LinkedList, we should traverse some portion of the list manually).
+
+5. Queue interface
+- Augments Collection interface
+- Collection whose elements are inserted using an insertion order (FIFO) or an element order (Priority queue). 
+- Defines a head position where is the first element can be accessed with peek (returning it) or poll (returning it and removing it)
+- It is implemented by LinkedList and by PriorityQueue
+
+6. Set / SortedSet interface
+- Augments Collection interface, but contains no methods other than those inherited
+- It has no duplicate elements, add() has the restriction that no duplicate elements are allowed
+- Regarding the iterator, for Set, the elements are traversed in no particular order, for SortedSet, the elemetns are traversed according to the natural ordering (ascending)
+- Set implementation is HashSet (hash tables as internal data structure - faster) which is extended by  LinkedHashSet (where elements are traversed by iterator according to insertion order) 
+- SortedSet implementation is TreeSet (R-B trees as internal data structure, but computationally expensive). Depending on the constructor used they require different implementation of the custom ordering: TreeSet() implies natural ordering, whereas TreeSet(Comparator c) implies ordering according to the comparator rules
+
+7. Iterators
+- Iterable interface is a container of elements that can be iterated upon.
+- It provides a single instance method: Iterator<E> iterator(), returning the iterator on the elements of the collection, indeed collection extends iterable
+- A common operation with collections is to iterate over their elements, iterator interface provides a transparent means to cycle through all elements of a Collection keeping track of last visited elements
+- Iterator allows the iteration on the elements of a collection, with two main methods: boolean hasNext(), checking if there is a next element to iterate on, E next(), returning the next element and advances by one position, and void remove(), optional method removing the current element.
+- Iterable defines the default method: forEach(Consumer<? super T> action), that can be used to perform operations with a functional interface
+-It is unsafe to iterate over a collection you are modifying (add/remove) at the same time! Unless you are using the iterator's own methods Iterator.remove() and ListIterator.add()
+-- Examples:
+Iterable<Person> persons = new LinkedList<Person>();
+...
+for (Iterator<Person>  i=persons.iterator(); i.hasNext(); ){
+	Person p = i.next();
+	...
+	System.out.println(p);
+}
+//for-each syntax avoids using iterator directly
+for (Person p: persons){
+	...
+	System.out.println(p);
+}
+//forEach default method
+persons.forEach(p -> {System.out.println(p)});
+//removing and adding elements
+List<Integer> lst=new LinkedList<>();
+lst.add(10); lst.add(11); lst.add(13); lst.add(20);
+int count=0;
+for (Iterator<?> itr=lst.iterator(); itr.hasNext();){
+	itr.next();
+	if (count==1){
+		lst.remove(count); //WRONG!
+		itr.remove(); //correct
+	}
+	count++;
+}
+for (ListIterator<Integer> itr = lst.listIterator(); itr.hasNext();){
+	itr.next();
+	if (count==2){
+		lst.add(count, 22); //WRONG!
+		itr.add(new Integer(22)); //correct
+	}
+}
+--
+
+8. Associative containers(maps)
+- Map is a container that associates keys to values (e.g. SSN -> Person)
+- Keys and values must be object, and keys must be unique: only one value per key
+- Following constructors are common to all collection implementers: M(), M(Map m)
+- Map interface introduces different methods such as:
+ . V put(K key, V value), V get(K key), Object remove(K key)
+ . boolean containsKey(K key), boolean containsValue(V value)
+ . int size(), boolean isEmpty(), void clear()
+-- Example
+Map<String, Person> people = new HashMap<>();
+people.put("ALCSMT", new Person("Alice", "Smith"));
+people.put("RBTGRN", new Person("Robert", "Green"));
+if (!people.containsKey("RBTGRN")
+	System.out.println("Not found");
+Person bob=people.get("RBTGRN");
+int populationSize=people.size();
+for (Person p : people.values())
+	System.out.println(p);
+for (String ssn : people.keySet())
+	System.out.println(ssn);
+--
+- SortedMap interface augments Map interface, but now elements are traversed according to the keys' natural ordering, or using comparator passed to ctor
+- Some methods of SortedMap are: SortedMap subMap(K fromKey, K toKey), SortedMap headMap(K toKey), SortedMap tailMap(K fromKey), K firstKey(), K lastKey();
+- Map implementations are similar to Set: HashMap implements Map (no order), LinkedHashMap extends HashMap (insertion order) and TreeMap implements SortedMap (ascending key order)
+
+9. Optional Class
+- Nullability problem: typical convention in Java APIs is to let a method return a null reference to represent the absence of a result. The caller must check the return value of the method to detect that case, in absence of checks NPE may occur.
+- Optional is a class used to represent a potential value, methods returning Optional<T> make explicit that the return value may be missing
+- Access to embedded value through: boolean isPresent(), ifPresent(Consumer<T> block), T get(). T orElse(T default), ...
+- Creations uses static factory methods: of(T v), ofNullable(T v), empty(), ..
+
+10. Use of collections
+- General interfaces are more flexible for future changes (List<> is better than LinkedList<>): makes you think first about the type of container then about the implementation
+- If access by key is needed use a Map (if values sorte by key use a SortedMap). Otherwise use a Collection: if index access use a List, if access in order use a Queue and if not duplicates use a Set (if elements are sorted use a SortedSet).
+- List implementation: ArrayList vs LinkedList complexity of operations
+ . get(n), constant/linear
+ . add(ind,...), linear/constant
+ . add(), constant/constant
+- Using maps:
+ . getting an item
+ 	. String val=map.get(key);
+ 	  if (val==null)
+		//not found
+ 	. if (!map.containsKey(key)){
+		//not found
+   	}
+   	String val=map.get(key);
+ . updating entries(e.g. counting fequencies)
+	Map<String, Integer> wc=new XMap<>();
+	for (String w : words){
+		Integer i=wc.get(w);
+		wc.put(w, i==null?1:i+1);
+	}
+- HashMap get/put takes constant time (in case of no collisions) and automatic re-allocation is done when load factor reached (default: loadFactor=0.75, initialCapacity=16)
+- Hash-based containers work better if entries define suitable hashCode(), spreading values as much as possible to reduce collision probability
+- TreeMap get/put takes logtime but keys are maintained and will be traversed in order (but requries comparator if a specific order is required)
+- Algorithms are static methods of java.util.Collections
+ . sort() - merge sort of list (nlog(n))
+ . binarySearch() - requires ordered sequence
+ . shuffle() - unsort
+ . reverse() - requires ordered sequence
+ . min()/max() - in a Collection
+
+________________
+J06-JavaStreams
+
+1. Stream
+- A sequence of elements from a source that supports data processing operations (from intermediate to the terminal one whihc ends the stream)
+- Functional interfaces are used to extensively define the behavior of the various stream operations (reminder: a functional interfaces is any interface that has exactly one abstract method and is the basis for lambda expressions). The predefined interaces are defined in java.util.function
+
+2. Stream source
+- From arrays: String[] s=...;  Arrays.stream(s).forEach(...);
+- Stream of: Stream.of("Red", "Green", ...).forEach(...);
+- Collection: Collection<Student> oopClass=new LinkedList<>(); oopClass.add(...); oopClass.stream().forEach(...);
+- Generate using a Supplier: Stream.generate(() -> Math.random()*10); Stream.iterate(0, (prev) -> prev+2); //WARNING: They generate infinite streams, so they have to be limited
+- Numeric streams (provided for basic numeric types): DoubleStream, IntStream, LongStream.
+Example: IntStreams seq=IntStream.generate(() -> (int)(Math.random()*100));
+int max = seq.limit(10).max().getAsInt();
+
+3. Intermediate operations
+- Basic filtering: distinct() [discards duplicates], limit(int n) [retains only first n elements], skip(int n) [discards the first n elements], ...
+- Filtering: Accepts as predicate, either as boolean method reference (example: .filter(Student::isFemale)) or as lambda (example .filter(s->s.getFirst().equals("John")))
+- Sorting: Sorts the elements of the stream either in natural order (.sorted()) or with a comparator (.sorted(comparingInt(Student::getId) or .sorted(Comparator.comparing(Student::getLastName).thenComparing(Student::getFirstName))
+- Mapping: Transforms each element of the stream using the mapper function (example: .map(Student::getFirst)). For main primitive types there is specific mapping like mapToInt, mapToDouble , ...
+- Flat-mapping: stream elements are containers (or elements are mapped to containers), but processing shoud be applied to elements inside those containers, to flatMap extracts a stream from each incoming stream element and concatenate together the resulting streams (example: oopClass.stream.map(Student::enrolledIn).flatMap(Collection::stream).distinct().map(Course::getTitle). ..., in this case we start from a Stream<Student>, we map to Stream<Collection<Course>>, we flatmap to Stream<Course> and map to Stream<String>)
+
+4. Terminal operations
+- Terminal feature: take care that terminal operations must be the last operation that you do on a stream, if not you will receive a run-time error.
+- Some example of operations: findAny() [returns the first element, order does not count], findFirst() [returns the first element, order counts], min()/max() [find the min/max element based on the comparator argument], count() [returns the number of elements in the stream], forEach() [applies the consumer function to all elements in the stream, ...
+- Some example of operations with predicate: anyMatch() [checks if any element in the stream matches the predicate], allMatch() [checks if all the elements in the stream match the predicate], noneMatch() [checks if none element in the stream match the predicate], ...
+- Two kinds of operations: stateless, where internal storage is not required (e.g. map & filter) and stateful, it requires internal storage that can be bounded (fixed amount, e.g. reduce & limit) or unbounded (unlimited memory, e.g. sorted & collect)
+- reduce(), reduces the elements using an identity value and an associative merge operator (taking as argument: T, BinaryOperator<T>) -> T reduce(T identity, BinaryOperator<T> merge)Examples:
+//the length of the longest first name among the students in oop class
+int m=oopClass.stream().map(Student::getFirst).map(String::length).reduce(0,Math::max);
+//the sum of the elements of an array
+int sum=Arrays.stream(numbers).reduce(0,(a,b) -> a+b);
+//concatinating strigns in a list
+String sentence=words.stream().reduce("",(a,b)->a.isEmpty()? b:a+" "+b);
+Note: .parallel(), allows to execute the operations in parallel.
+- collect(), reduces the stream to create a collection such as a List, a Map, or even an Integer (taking as argument: Collector<T,A,R>) -> R collect(Collector<T,A,R> collector), where T is the type of elements in the stream, A is the type of accomulator, R is the type of results produced by the collector. The supplier is used to create a new instance of the accumulator, the accumulator is used to update the accumulator with the next element of the stream, and the combiner is used to combine the results of two parallel reduction operations. Together, these three elements enable a mutable reduction operation on the elements of a stream.
+Examples:
+//counting
+long count=numbers.stream().collect(Collectors.counting());
+//summing
+long sum=numbers.stream().collect(Collectors.summingInt(Integer::new));
+//summarizing
+IntSummaryStatistics intStats=numbers.stream().collect(Collectors.stats(Integer::new));
+//transforming a list to a list of even numbers only
+List<Integer> numbersEvenOnly = numbers.stream().filter(x->x%2==0).collect(Collectors.toList());
+//joining streams
+String boysConc=boys.collect(Collectors.joining(", ","The guys are: ","."));
+Note: Reduce is bounded, and the merge operation can be used to combine results from parallel computation threads, Collect is unbounded, and combining results form parallel computation threads that can be performed with the combiner
+
+5. Predefined Collectors
+- Predefined recipes are returned by static methods in Collectors class [import static java.util.stream.Collectors.*]
+- Summarizing collectors are:
+ . counting(), counts the number of elements in stream (return long)
+ . maxBy()/minBy(), find the max/min according to the given comparator (return T)
+ . summingType(), sum the elements (return Type, Type can be Int, Long or Double)
+ . averagingType(), compute the arithmetic mean (return Type)
+ . summarizingType(), compute several summary statistics from elements (return TypeSummary-Statistics)
+- Accumulating collectors are:
+ . toList(), accumulates into a new List (return List<T>)
+ . toSet(), accumulates into a new Set (return Set<T>)
+ . toCollection(Supplier<> cs), accumulates into the collection provided by given Supplier (return Collection<T>)
+ . joining(), concatenates into a String (optional arguments: separator, prefix and postfix)
+Example: //returning the three longest words in a text
+List<String> longestThreeWords = Stream.of(text).distinct().sorted(comparing(String::length).reversed()).limit(3).collect(toList());
+- Grouping collectors are:
+ . groupingBy(Function<T,K> classifier), returns a map according to the key extracted (by classifier) and add to list (optional arguments: downstream collector and map factory supplier) -> Map<K, List<T>>
+ . partitionBy(Function<T,Boolean> p), return a map splitting according to parition function p and adding to the list -> Map<Boolean, List<T>>
+Examples:
+// 1 - Grouping by age, returning a map with key the age and value a sorted list of persons based on their age
+Map<Integer,List<Person>> ageOfPersons = persons.stream().collect(groupingBy(Person::getAge,TreeMap::new,Collectors.toList()))
+// 2 - Grouping by age, returning a map with key the age and value a sorted list of persons'names based on their age
+Map<Integer, List<String>> ageOfPersonsNameV = persons.stream().collect(groupingBy(Person::getAge,mapping(Person::getName,Collectors.toList())))
+// 3 - Sorted grouping by feature, in this case words sorted by descending length
+Map<Integer,List<String>> byLength = words.stream().collect(groupingBy(String::length,() ->TreeMap<>(reverseOrder()),toList()))
+// 4 - Grouping and counting, in this case the frequency of the words
+Map<String, Long> frequency = words.stream().collect(groupingBy(w->w,counting()))
+- Collector compositions are:
+ . collectingAndThen(Collector<T,?,R> cltr, Function<R,RR> mapper), applies a transformation (mapper) after performing collection (cltr)
+ . mapping (Function<T,U> mapper, Collector<U,?,R> cltr), performs a transformation (mapper) before applying the collector (cltr)
+Example: // returning a list of strings containing as values freq:word
+List<String> assoc = words.stream().collect(collectingAndThen(
+	groupingBy(w->w,counting()),
+	m -> m.entrySet().stream().sorted(Map.Entry::getValue)
+		.map(e->e.getValue()+" "+e.getKey()).collect(toList())
+	));
+Example: // given an array of persons, return the list of rowers'names
+List<String> rowers = words.stream().collect(collectingAndThen(
+	partitionBy(p->p.getHobbies().contains("rowing")),
+		collectingAndThen(
+			mapping(Person::getName,toList().
+			LinkedList::new)));
+	
+
+
+
+
+
+
+

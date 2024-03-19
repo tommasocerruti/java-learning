@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;exam-football&apos;&#x0D;&#x0A;- Original project: &apos;exam-football&apos;&#x0D;&#x0A;- Original element: &apos;it.polito.oop.futsal.Field.java&apos;" description="Delete element" element1="/src&lt;it.polito.oop.futsal{Field.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1689064159260" subPackages="false" version="1.0"/>
+</session>

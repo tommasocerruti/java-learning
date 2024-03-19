@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;Example1SortingStringerInterface&apos; to &apos;Example1SortingStringInterface&apos;&#x0D;&#x0A;- Original element: &apos;Example1SortingStringerInterface&apos;&#x0D;&#x0A;- Renamed element: &apos;Example1SortingStringerInterface&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;Example1SortingStringerInterface&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=Example1SortingStringerInterface" name="Example1SortingStringInterface" references="true" stamp="1682695241977" version="1.0"/>
+</session>

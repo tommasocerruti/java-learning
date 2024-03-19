@@ -1,0 +1,53 @@
+package jobOffersTry;
+
+import java.util.*;
+
+public class jobOffers {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("This is a test\n");
+
+	}
+	
+	
+	//R1
+	
+	Collection<String> skills=new TreeSet<>();
+	Map<String,Position> positions=new TreeMap<>();
+	
+	public int addSkills(String... skills) {
+		int count=0;
+		for (String skill:skills) {
+			if (!this.skills.contains(skill)) {
+				this.skills.add(skill);
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int addPosition(String role, String... skillLevels) throws JOException{
+		if (positions.containsKey(role))
+			throw new JOException("Position already present");
+		Position pos=new Position(role);
+		String skillName;
+		int skillLevel;
+		for (String skill:skillLevels) {
+			skillName=skill.split(":")[0];
+			skillLevel=Integer.parseInt(skill.split(":")[1]);
+			if (!skills.contains(skillName))
+				throw new JOException("Skill not present");
+			if ((skillLevel<4)||(skillLevel>8))
+				throw new JOException("Skill level not valid");
+			pos.insertSkill(skillName, skillLevel);
+		}
+		return pos.avgSkill();
+	}
+	
+	
+	//R2
+	
+	
+
+}

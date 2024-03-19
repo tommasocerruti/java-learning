@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="128"/>
+		<item key="DIALOG_Y_ORIGIN" value="251"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\tomma\git\exam-20230717-library"/>
+			<item value="C:\Users\tomma\Downloads\2023_06_27_exams (1)\Exam\2023_06_27_MedicalCenterExam"/>
+			<item value="C:\Users\tomma\git\timemessaround"/>
+			<item value="C:\Users\tomma\git\timemess"/>
+			<item value="C:\Users\tomma\git\lab6-social"/>
+			<item value="C:\Users\tomma\git\exam20220630-job-offers"/>
+			<item value="C:\Users\tomma\git\exam-football"/>
+			<item value="C:\Users\tomma\git\exam-electivecourses"/>
+			<item value="C:\Users\tomma\git\exam-delivero"/>
+			<item value="C:\Users\tomma\git\exam-book"/>
+			<item value="C:\Users\tomma\Downloads\2023_06_27_exams (1) 2\Exam\2023_06_27_MedicalCenterExam"/>
+			<item value="C:\Users\tomma\Downloads\2023_06_27_exams (1) 2\Exam\2023_06_27_TrainManagerExam"/>
+			<item value="C:\Users\tomma\Downloads\2023_06_27_exams (1) 2\Exam\2023_06_27_MeetingPlannerExam"/>
+			<item value="C:\Users\tomma\git"/>
+			<item value="C:\Users\tomma\git\lab5-clinic_second"/>
+			<item value="C:\Users\tomma\git\lab3-diet-neww"/>
+			<item value="C:\Users\tomma\git\lab3-diet-new"/>
+			<item value="C:\Users\tomma\git\lab2-hydraulics-neww"/>
+			<item value="C:\Users\tomma\git\lab2-hydraulics-new"/>
+			<item value="C:\Users\tomma\git\lab1-university-new"/>
+			<item value="C:\Users\tomma\git\lab5-clinic"/>
+			<item value="C:\Users\tomma\OneDrive\Desktop\Courses\OOP\programming\HelloWorld"/>
+		</list>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="136"/>
+		<item key="DIALOG_Y_ORIGIN" value="93"/>
+		<item key="DIALOG_WIDTH" value="700"/>
+		<item key="DIALOG_HEIGHT" value="631"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-30|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.JavaProjectWizard"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.jdt.ui.java"/>
+		</list>
+	</section>
+</section>

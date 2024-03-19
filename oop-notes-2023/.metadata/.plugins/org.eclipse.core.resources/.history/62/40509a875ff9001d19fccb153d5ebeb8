@@ -1,0 +1,47 @@
+import java.io.*;
+
+public class Application {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		
+		//Example with StringWriter and StringReader
+		try (StringWriter stringWriter=new StringWriter(); 
+			PrintWriter printWriter=new PrintWriter(stringWriter)){
+			
+			//Writing data to StringWriter
+			printWriter.print("Hello");
+			printWriter.print(" ");
+			printWriter.print("World!");
+			String output=stringWriter.toString();
+			System.out.println("Output from StringWriter: ");
+			System.out.println(output);
+			
+			//Read from a string using StringReader
+			StringReader stringReader=new StringReader(output);
+			BufferedReader bufferedReader=new BufferedReader(stringReader);
+			System.out.println("\nReading data using StringReader in a buffered fashion: ");
+			String line;
+			while((line=bufferedReader.readLine())!=null)
+				System.out.println(line);
+		}
+		catch (IOException eio) {
+			eio.printStackTrace();
+		}
+		
+		//example with err
+		System.err.println("This is an error message");
+		
+		//example with in
+		byte [] buffer=new byte[4096];
+		int correctReading=System.in.read(buffer);
+		if (correctReading!=-1) {
+			System.out.print(new String(buffer,0,correctReading));
+		}
+		
+		//example from slides about file reading
+		try(Reader src = new FileReader(); Writer dest = new FileWriter();)
+		
+	}
+
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel" value="0"/>
+	<list key="EGit.KnownHosts">
+		<item value="bitbucket.org"/>
+		<item value="github.com"/>
+		<item value="git.eclipse.org"/>
+		<item value="git-oop.polito.it"/>
+	</list>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://git-oop.polito.it/s282754/exam-20230717-library.git"/>
+		<item value="https://git-oop.polito.it/s282754/timemess.git"/>
+		<item value="https://git-oop.polito.it/s282754/lab6-social.git"/>
+		<item value="https://git-oop.polito.it/exams/exam20220630-job-offers.git"/>
+		<item value="https://git-oop.polito.it/exams/exam-football.git"/>
+		<item value="https://git-oop.polito.it/exams/exam-electivecourses.git"/>
+		<item value="https://git-oop.polito.it/exams/exam-delivero.git"/>
+		<item value="https://git-oop.polito.it/exams/exam-book.git"/>
+		<item value="https://git-oop.polito.it/s282754/lab5-clinic.git"/>
+		<item value="https://git-oop.polito.it/labs/lab3-diet.git"/>
+	</list>
+	<list key="CommitDialog.authorValues">
+		<item value="tommasocerruti &lt;79256764+tommasocerruti@users.noreply.github.com&gt;"/>
+		<item value="tomma &lt;tomma@DESKTOP-CRRTMS02P26D969D.station&gt;"/>
+		<item value="tomma &lt;tomma@172.22.17.43&gt;"/>
+		<item value="tomma &lt;tomma@172.21.78.44&gt;"/>
+		<item value="tomma &lt;tomma@172.21.33.52&gt;"/>
+		<item value="tomma &lt;tomma@172.21.33.61&gt;"/>
+		<item value="tomma &lt;tomma@172.21.32.186&gt;"/>
+		<item value="tomma &lt;tomma@172.22.33.34&gt;"/>
+		<item value="tomma &lt;tomma@172.21.115.13&gt;"/>
+		<item value="tomma &lt;tomma@172.22.246.23&gt;"/>
+	</list>
+	<list key="CommitDialog.committerValues">
+		<item value="tommasocerruti &lt;79256764+tommasocerruti@users.noreply.github.com&gt;"/>
+		<item value="tomma &lt;tomma@DESKTOP-CRRTMS02P26D969D.station&gt;"/>
+		<item value="tomma &lt;tomma@172.22.17.43&gt;"/>
+		<item value="tomma &lt;tomma@172.21.78.44&gt;"/>
+		<item value="tomma &lt;tomma@172.21.33.52&gt;"/>
+		<item value="tomma &lt;tomma@172.21.33.61&gt;"/>
+		<item value="tomma &lt;tomma@172.21.32.186&gt;"/>
+		<item value="tomma &lt;tomma@172.22.33.34&gt;"/>
+		<item value="tomma &lt;tomma@172.21.115.13&gt;"/>
+		<item value="tomma &lt;tomma@172.22.246.23&gt;"/>
+	</list>
+	<section name="GitImportWizard">
+		<item key="GitProjectsImportPage.STORE_NESTED_PROJECTS" value="true"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item key="MAIN_SASH_FORM_ORIENTATION_VERTICAL" value="false"/>
+		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="500,500"/>
+		<item key="STAGING_SASH_FORM_WEIGHT" value="500,500"/>
+		<item key="sortItemState" value="false"/>
+	</section>
+	<section name="GitCommitMessageComponent">
+		<list key="C:\Users\tomma\git\lab5-clinic\.git">
+			<item value="empty"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="189"/>
+		<item key="DIALOG_Y_ORIGIN" value="190"/>
+		<item key="DIALOG_WIDTH" value="700"/>
+		<item key="DIALOG_HEIGHT" value="473"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-30|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		<list key="sashWeights">
+			<item value="600"/>
+			<item value="400"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="227"/>
+		<item key="DIALOG_Y_ORIGIN" value="212"/>
+		<item key="DIALOG_WIDTH" value="629"/>
+		<item key="DIALOG_HEIGHT" value="452"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-30|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>
